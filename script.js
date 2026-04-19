@@ -340,7 +340,7 @@ document.querySelectorAll('.draggable').forEach(card => {
 /* ========== 3D SKILLS GLOBE (Three.js) ========== */
 (function initGlobe() {
   const canvas = document.getElementById('skills-globe');
-  const GLOBE_SIZE = Math.min(window.innerWidth < 600 ? 260 : 360, 360);
+  const GLOBE_SIZE = Math.min(window.innerWidth < 600 ? 340 : 650, 650);
   canvas.width = GLOBE_SIZE;
   canvas.height = GLOBE_SIZE;
 
