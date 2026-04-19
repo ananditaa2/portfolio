@@ -440,6 +440,29 @@ document.querySelectorAll('.draggable').forEach(card => {
     ]);
     const line = new THREE.Line(lineGeo, lineMat);
     skillGroup.add(line);
+
+    // Text Label Sprite
+    const canvasTxt = document.createElement('canvas');
+    canvasTxt.width = 256; 
+    canvasTxt.height = 128;
+    const ctxTxt = canvasTxt.getContext('2d');
+    ctxTxt.font = '800 28px "Outfit", sans-serif'; 
+    ctxTxt.textAlign = 'center';
+    ctxTxt.textBaseline = 'middle';
+    ctxTxt.fillStyle = '#ffffff';
+    ctxTxt.shadowColor = '#' + sk.color.toString(16).padStart(6, '0');
+    ctxTxt.shadowBlur = 10;
+    ctxTxt.fillText(sk.label, 128, 64);
+    
+    const texture = new THREE.CanvasTexture(canvasTxt);
+    texture.minFilter = THREE.LinearFilter;
+    const spriteMat = new THREE.SpriteMaterial({ map: texture, transparent: true });
+    const sprite = new THREE.Sprite(spriteMat);
+    
+    const distT = 1.18; // Float slightly above the node
+    sprite.position.set(x * distT, y * distT, z * distT);
+    sprite.scale.set(0.5, 0.25, 1); // 2:1 aspect ratio match
+    skillGroup.add(sprite);
   });
 
   // Orbit ring
