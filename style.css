@@ -1103,5 +1103,5 @@ section { padding: 100px 5vw; position: relative; }
   .hero-title { font-size: 2rem; }
   .skills-layout { flex-direction: column; }
   .results-container { flex-direction: column; }
-  #skills-globe { width: 340px !important; height: 340px !important; }
+  #skills-globe { max-width: 100% !important; height: auto !important; }
 }
