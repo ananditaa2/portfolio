@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anandita Indurkhya — Portfolio</title>
+  <meta name="description" content="Personal portfolio of Anandita Indurkhya — developer, designer, and AI/ML enthusiast." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+  <!-- Doodle SVG Background -->
+  <div class="doodle-bg" aria-hidden="true">
+    <svg class="doodle doodle-1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 10 L55 20 L65 22 L57 30 L59 42 L50 37 L41 42 L43 30 L35 22 L45 20 Z" fill="none" stroke="#FFBDE0" stroke-width="2.5"/>
+    </svg>
+    <svg class="doodle doodle-2" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="30" cy="30" r="25" fill="none" stroke="#C8B6FF" stroke-width="2" stroke-dasharray="6 4"/>
+    </svg>
+    <svg class="doodle doodle-3" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 40 Q40 10 60 40 Q40 70 20 40Z" fill="none" stroke="#FFD6A5" stroke-width="2.5"/>
+    </svg>
+    <svg class="doodle doodle-4" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+      <line x1="25" y1="5" x2="25" y2="45" stroke="#AECBFA" stroke-width="2" stroke-linecap="round"/>
+      <line x1="5" y1="25" x2="45" y2="25" stroke="#AECBFA" stroke-width="2" stroke-linecap="round"/>
+      <line x1="11" y1="11" x2="39" y2="39" stroke="#AECBFA" stroke-width="2" stroke-linecap="round"/>
+      <line x1="39" y1="11" x2="11" y2="39" stroke="#AECBFA" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <svg class="doodle doodle-5" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10,50 Q30,10 50,50 Q70,90 90,50" fill="none" stroke="#B5EAD7" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+    <svg class="doodle doodle-6" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="30,5 37,22 55,22 41,34 46,52 30,41 14,52 19,34 5,22 23,22" fill="none" stroke="#FFBDE0" stroke-width="2"/>
+    </svg>
+    <svg class="doodle doodle-7" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="40" cy="40" r="15" fill="none" stroke="#C8B6FF" stroke-width="2"/>
+      <circle cx="40" cy="40" r="25" fill="none" stroke="#C8B6FF" stroke-width="1" opacity="0.5"/>
+      <circle cx="40" cy="40" r="35" fill="none" stroke="#C8B6FF" stroke-width="1" opacity="0.25"/>
+    </svg>
+    <svg class="doodle doodle-8" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 25 Q25 5 40 25 Q25 45 10 25Z" fill="none" stroke="#FFD6A5" stroke-width="2.5"/>
+    </svg>
+  </div>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <div class="nav-logo">✦ <span>Anandita Indurkhya</span></div>
+    <ul class="nav-links">
+      <li><a href="#about" class="nav-link">About</a></li>
+      <li><a href="#skills" class="nav-link">Skills</a></li>
+      <li><a href="#projects" class="nav-link">Projects</a></li>
+      <li><a href="#results" class="nav-link">Results</a></li>
+      <li><a href="#achievements" class="nav-link">Achievements</a></li>
+      <li><a href="#contact" class="nav-link">Contact</a></li>
+    </ul>
+    <button class="nav-cta" id="hire-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Hire Me ✨</button>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#about" class="mobile-link">About</a>
+    <a href="#skills" class="mobile-link">Skills</a>
+    <a href="#projects" class="mobile-link">Projects</a>
+    <a href="#results" class="mobile-link">Results</a>
+    <a href="#achievements" class="mobile-link">Achievements</a>
+    <a href="#contact" class="mobile-link">Contact</a>
+  </div>
+
+  <!-- Hero Section -->
+  <section id="hero">
+    <div class="hero-content">
+      <div class="hero-badge">✦ Available for opportunities</div>
+      <h1 class="hero-title">
+        Hi, I'm <span class="gradient-text">Anandita Indurkhya</span> 👋
+        <br/>Developer &amp; AI Enthusiast
+      </h1>
+      <p class="hero-sub">
+        I craft engaging digital experiences through code, design, and a sprinkle of machine learning magic.
+      </p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">View Projects 🚀</button>
+        <a href="Anandita_Indurkhya_Resume.pdf" target="_blank" class="btn-secondary" id="resume-btn">Resume ↓</a>
+      </div>
+      <div class="hero-socials">
+        <a href="https://github.com/ananditaa2" target="_blank" class="social-chip" id="github-link">GitHub</a>
+        <a href="https://www.linkedin.com/in/anandita02/" target="_blank" class="social-chip" id="linkedin-link">LinkedIn</a>
+        <a href="mailto:ananditaindurkhya02@gmail.com" class="social-chip" id="email-link">Email</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="avatar-ring">
+        <div class="avatar-inner">
+          <div class="avatar-emoji">👩‍💻</div>
+        </div>
+      </div>
+      <div class="floating-chip chip-a">Python 🐍</div>
+      <div class="floating-chip chip-b">React ⚛️</div>
+      <div class="floating-chip chip-c">AI/ML 🤖</div>
+      <div class="floating-chip chip-d">Three.js 🌐</div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="section-header">
+      <span class="section-tag">Who am I?</span>
+      <h2 class="section-title">About Me</h2>
+    </div>
+    <div class="about-grid about-grid-2col">
+      <div class="about-card card-personality" id="about-personality">
+        <div class="card-icon">🤖</div>
+        <h3>AI / ML Engineer</h3>
+        <p>Aspiring AI & ML engineer with a strong foundation in web development and UI/UX design.</p>
+      </div>
+      <div class="about-card card-main" id="about-main">
+        <div class="about-label caveat-font">A bit about me ✍️</div>
+        <p>I am an aspiring <strong>AI & ML Engineer</strong> with a background in Web Development and UI/UX design. I specialize in building functional, user-centric applications—from local business websites to personal digital platforms.</p>
+        <p><strong>Currently focusing on:</strong></p>
+        <ul class="about-focus-list">
+          <li>🧠 AI & Machine Learning</li>
+          <li>📐 Data Structures, Algorithms & Operating Systems</li>
+        </ul>
+        <p style="margin-top:12px">I am actively seeking <strong>internship opportunities</strong> to apply my technical skills in a professional environment.</p>
+        <div class="about-tags">
+          <span class="tag">🌍 India</span>
+          <span class="tag">🔍 Open to Internships</span>
+          <span class="tag">🎨 UI/UX</span>
+          <span class="tag">💡 Problem Solver</span>
+        </div>
+      </div>
+      <div class="about-card card-fun" id="about-fun">
+        <div class="card-icon">🌱</div>
+        <h3>Always Growing</h3>
+        <p>Bridging the gap between intelligent systems and beautiful interfaces — one project at a time.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section - 3D Globe -->
+  <section id="skills">
+    <div class="section-header">
+      <span class="section-tag">What I know</span>
+      <h2 class="section-title">My Tech Universe 🌐</h2>
+      <p class="section-sub">Drag the globe to explore my skill constellation</p>
+    </div>
+    <div class="skills-layout">
+      <div class="globe-container" id="globe-container">
+        <canvas id="skills-globe"></canvas>
+        <div class="globe-hint">← Drag to rotate →</div>
+      </div>
+      <div class="skills-legend">
+        <div class="legend-group">
+          <div class="legend-title">Languages</div>
+          <div class="legend-items">
+            <div class="legend-item"><span class="legend-dot" style="background:#FF6B6B"></span>Python</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#FFD93D"></span>JavaScript</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#4FC3F7"></span>TypeScript</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#A29BFE"></span>C/C++</div>
+          </div>
+        </div>
+        <div class="legend-group">
+          <div class="legend-title">Frameworks</div>
+          <div class="legend-items">
+            <div class="legend-item"><span class="legend-dot" style="background:#00CEC9"></span>React</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#55EFC4"></span>Node.js</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#FD79A8"></span>Flask</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#FDCB6E"></span>Vue.js</div>
+          </div>
+        </div>
+        <div class="legend-group">
+          <div class="legend-title">Tools & Platforms</div>
+          <div class="legend-items">
+            <div class="legend-item"><span class="legend-dot" style="background:#6C5CE7"></span>Git</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#E17055"></span>Firebase</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#FF9F43"></span>Streamlit</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#1DD1A1"></span>MediaPipe</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <div class="section-header">
+      <span class="section-tag">What I've built</span>
+      <h2 class="section-title">Projects ✨</h2>
+      <p class="section-sub">Drag cards to rearrange them!</p>
+    </div>
+    <div class="projects-grid" id="projects-grid">
+
+      <div class="project-card draggable" id="proj-1" draggable="true">
+        <div class="project-accent" style="background: linear-gradient(135deg, #A29BFE, #6C5CE7)"></div>
+        <div class="project-badge">Full Stack · Environmental</div>
+        <h3 class="project-title">PrithviNet</h3>
+        <p class="project-desc">Real-time multi-parameter environmental monitoring platform for Chhattisgarh's industrial regions, built for CECB/CPCB compliance enforcement.</p>
+        <div class="project-tech">
+          <span>React</span><span>FastAPI</span><span>ML</span><span>Vercel</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/ananditaa2/PRITHVINET" target="_blank" class="proj-link">GitHub ↗</a>
+          <a href="https://prithvinet-2e98.vercel.app/" target="_blank" class="proj-link proj-live">Live Demo ▶</a>
+        </div>
+      </div>
+
+
+      <div class="project-card draggable" id="proj-3" draggable="true">
+        <div class="project-badge">Computer Vision</div>
+        <div class="project-accent" style="background: linear-gradient(135deg, #FFD93D, #FF6B6B)"></div>
+        <h3 class="project-title">Hand Tracker</h3>
+        <p class="project-desc">Real-time hand-skeleton overlay using MediaPipe for interactive gesture recognition — built to push the limits of browser-based CV.</p>
+        <div class="project-tech">
+          <span>JavaScript</span><span>MediaPipe</span><span>Canvas API</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/ananditaa2/hand-tracker" target="_blank" class="proj-link">GitHub ↗</a>
+          <a href="https://www.linkedin.com/posts/anandita02_computervision-ai-machinelearning-ugcPost-7448386208809959424-Q6s1" target="_blank" class="proj-link proj-live">Demo ▶</a>
+        </div>
+      </div>
+
+      <div class="project-card draggable" id="proj-4" draggable="true">
+        <div class="project-accent" style="background: linear-gradient(135deg, #FD79A8, #E84393)"></div>
+        <div class="project-badge">Weather · Python</div>
+        <h3 class="project-title">Weather App</h3>
+        <p class="project-desc">Elegant weather application with animated condition visuals, location-based forecasts and a clean Streamlit UI.</p>
+        <div class="project-tech">
+          <span>Python</span><span>Streamlit</span><span>OpenWeather API</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/ananditaa2/weather_app" target="_blank" class="proj-link">GitHub ↗</a>
+          <a href="https://weatherapp-79rzbgcvhzevkfsmcq6e52.streamlit.app/" target="_blank" class="proj-link proj-live">Live Demo ▶</a>
+        </div>
+      </div>
+
+      <div class="project-card draggable" id="proj-5" draggable="true">
+        <div class="project-accent" style="background: linear-gradient(135deg, #00CEC9, #55EFC4)"></div>
+        <div class="project-badge">IoT · Computer Vision</div>
+        <h3 class="project-title">Anti-Proxy Attendance</h3>
+        <p class="project-desc">Hardware + software system using face recognition & Arduino to prevent proxy attendance in classrooms.</p>
+        <div class="project-tech">
+          <span>Arduino</span><span>Python</span><span>OpenCV</span><span>Face Recognition</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/ananditaa2/Anti-Proxy-Attendance-System-" target="_blank" class="proj-link">GitHub ↗</a>
+          <a href="https://www.linkedin.com/posts/anandita02_arduino-python-opencv-activity-7351958719259197440-y0VL" target="_blank" class="proj-link proj-live">Demo ▶</a>
+        </div>
+      </div>
+
+      <div class="project-card add-project-card" id="proj-add" draggable="false">
+        <div class="add-icon">+</div>
+        <p>More coming soon!</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Semester Results Section -->
+  <section id="results">
+    <div class="section-header">
+      <span class="section-tag">Academic Journey</span>
+      <h2 class="section-title">Semester Results 📊</h2>
+    </div>
+    <div class="results-container">
+      <div class="results-cards">
+        <div class="result-card" id="sem-1">
+          <div class="sem-label">Semester 1</div>
+          <div class="sem-spi-row">SPI <span class="sem-spi-val">7.95</span></div>
+          <div class="sem-bar"><div class="sem-fill" style="width:79.5%"></div></div>
+          <a href="results/sem1.pdf" target="_blank" class="pdf-btn" id="sem1-pdf">📄 View Result PDF</a>
+        </div>
+        <div class="result-card" id="sem-2">
+          <div class="sem-label">Semester 2</div>
+          <div class="sem-spi-row">SPI <span class="sem-spi-val">8.00</span></div>
+          <div class="sem-bar"><div class="sem-fill" style="width:80%"></div></div>
+          <a href="results/sem2.pdf" target="_blank" class="pdf-btn" id="sem2-pdf">📄 View Result PDF</a>
+        </div>
+        <div class="result-card" id="sem-3">
+          <div class="sem-label">Semester 3</div>
+          <div class="sem-spi-row">SPI <span class="sem-spi-val">7.70</span></div>
+          <div class="sem-bar"><div class="sem-fill" style="width:77%"></div></div>
+          <a href="results/sem3.pdf" target="_blank" class="pdf-btn" id="sem3-pdf">📄 View Result PDF</a>
+        </div>
+        <div class="result-card cumulative" id="sem-cum">
+          <div class="sem-label">Aggregate CPI</div>
+          <div class="sem-cgpa cgpa-big">7.88</div>
+          <div class="sem-grade">📊 (Semesters 1–3)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Achievements Section -->
+  <section id="achievements">
+    <div class="section-header">
+      <span class="section-tag">Milestones</span>
+      <h2 class="section-title">Achievements 🏆</h2>
+    </div>
+    <div class="achievements-grid" id="achievements-grid">
+
+      <div class="achievement-card ach-large" id="ach-1">
+        <div class="ach-emoji">🥈</div>
+        <div class="ach-content">
+          <div class="ach-year">2025</div>
+          <h3>2nd Rank — Arduino Project Competition</h3>
+          <p>Secured <strong>2nd rank</strong> in the Project Development Competition at <strong>SSIPMT IDEA Lab</strong> (AICTE) for the <em>Anti-Proxy Attendance System</em>. Completed a 3-month Foundation Course on Arduino during BTech 1st Year.</p>
+          <span class="ach-tag">AICTE IDEA Lab · Certificate</span>
+          <a href="certificates/arduino_aicte.png" target="_blank" class="cert-btn" id="cert-1">🪹 View Certificate</a>
+        </div>
+      </div>
+
+      <div class="achievement-card" id="ach-2">
+        <div class="ach-emoji">💻</div>
+        <div class="ach-content">
+          <div class="ach-year">2026</div>
+          <h3>E-Summit'26 Hackathon</h3>
+          <p>Participated in the <strong>Hackathon at E-Summit'26</strong> as part of Team <em>Vaud8</em>, demonstrating creativity, collaboration and problem-solving. Organized by IIITNR in association with CHIPS &amp; StartUp Chhattisgarh.</p>
+          <span class="ach-tag">Hackathon · IIITNR</span>
+          <a href="certificates/esummit26.jpg" target="_blank" class="cert-btn" id="cert-2">🪹 View Certificate</a>
+        </div>
+      </div>
+
+      <div class="achievement-card" id="ach-3">
+        <div class="ach-emoji">🌐</div>
+        <div class="ach-content">
+          <div class="ach-year">2025</div>
+          <h3>Navonmesh 3.0 — National Hackathon</h3>
+          <p>Participated in <strong>Navonmesh 3.0</strong>, a National Level Hackathon on real-time challenges of Raipur Nagar Nigam, organized by SSIPMT in collaboration with Raipur Municipal Corporation.</p>
+          <span class="ach-tag">National Hackathon · SSIPMT</span>
+          <a href="certificates/navonmesh.png" target="_blank" class="cert-btn" id="cert-3">🪹 View Certificate</a>
+        </div>
+      </div>
+
+      <div class="achievement-card" id="ach-4">
+        <div class="ach-emoji">🏗️</div>
+        <div class="ach-content">
+          <div class="ach-year">2024</div>
+          <h3>Web Dev Workshop — Techfest, IIT Bombay</h3>
+          <p>Completed the <strong>Web Development workshop</strong> conducted by <strong>Techfest, IIT Bombay</strong> (17–19 December 2024), one of Asia's largest science &amp; technology festivals.</p>
+          <span class="ach-tag">Workshop · IIT Bombay</span>
+          <a href="certificates/techfest_iitb.png" target="_blank" class="cert-btn" id="cert-4">🪹 View Certificate</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="section-header">
+      <span class="section-tag">Get in touch</span>
+      <h2 class="section-title">Let's Connect 💌</h2>
+      <p class="section-sub">Always open to exciting collaborations and opportunities!</p>
+    </div>
+    <div class="contact-layout">
+      <div class="contact-form-wrap">
+        <form class="contact-form" id="contact-form">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="Jane Doe" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="jane@example.com" required />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" placeholder="I'd love to collaborate on..." required></textarea>
+          </div>
+          <button type="submit" class="btn-primary btn-full" id="send-btn">Send Message ✉️</button>
+          <div class="form-success" id="form-success">✅ Message sent! I'll get back to you soon.</div>
+        </form>
+      </div>
+      <div class="contact-info">
+        <div class="contact-card" id="contact-email">
+          <div class="contact-icon">📧</div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value">ananditaindurkhya02@gmail.com</div>
+          </div>
+        </div>
+        <div class="contact-card" id="contact-github">
+          <div class="contact-icon">🐙</div>
+          <div>
+            <div class="contact-label">GitHub</div>
+            <div class="contact-value">github.com/ananditaa2</div>
+          </div>
+        </div>
+        <div class="contact-card" id="contact-linkedin">
+          <div class="contact-icon">💼</div>
+          <div>
+            <div class="contact-label">LinkedIn</div>
+            <div class="contact-value">linkedin.com/in/anandita02</div>
+          </div>
+        </div>
+        <div class="contact-card" id="contact-location">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-label">Location</div>
+            <div class="contact-value">India 🇮🇳</div>
+          </div>
+        </div>
+        <div class="caveat-font contact-quote">"Code is poetry, and every commit is a new verse." ✨</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">✦ Anandita Indurkhya</div>
+      <p class="footer-copy">Made with 💖 and lots of ☕ · © 2026 Anandita Indurkhya</p>
+      <div class="footer-links">
+        <a href="#hero">Top ↑</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to top -->
+  <button class="scroll-top" id="scroll-top" aria-label="Scroll to top">↑</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
