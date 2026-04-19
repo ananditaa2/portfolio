@@ -11,10 +11,28 @@
   <link rel="stylesheet" href="style.css" />
   <!-- Three.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- GSAP Core & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 <body>
 
-  <!-- Doodle SVG Background -->
+  <!-- Custom Cursor & Neural Web Canvas -->
+  <canvas id="neural-canvas"></canvas>
+  <div id="cursor-dot"></div>
+  <div id="cursor-spotlight"></div>
+
+  <!-- Terminal Preloader -->
+  <div id="preloader">
+    <div class="terminal-wrapper" style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px;">
+      <div class="terminal-text" id="term-text" style="white-space: pre-line;"></div>
+    </div>
+  </div>
+
+  <!-- Main Content Wrapper (Hidden initially until preloader finishes) -->
+  <div id="main-wrapper" style="opacity: 0; visibility: hidden;">
+
+  <!-- Doodle SVG Background (Keeping but styles will be updated to be stealthy) -->
   <div class="doodle-bg" aria-hidden="true">
     <svg class="doodle doodle-1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
       <path d="M50 10 L55 20 L65 22 L57 30 L59 42 L50 37 L41 42 L43 30 L35 22 L45 20 Z" fill="none" stroke="#FFBDE0" stroke-width="2.5"/>
@@ -58,10 +76,13 @@
       <li><a href="#achievements" class="nav-link">Achievements</a></li>
       <li><a href="#contact" class="nav-link">Contact</a></li>
     </ul>
-    <button class="nav-cta" id="hire-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Hire Me ✨</button>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="nav-actions">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark/Light Mode">💡</button>
+      <button class="nav-cta" id="hire-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Hire Me ✨</button>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
 
   <!-- Mobile Menu -->
@@ -303,7 +324,9 @@
       <span class="section-tag">Milestones</span>
       <h2 class="section-title">Achievements 🏆</h2>
     </div>
-    <div class="achievements-grid" id="achievements-grid">
+    <div class="achievements-wrap" id="achievements-wrap" style="position: relative; max-width: 900px; margin: 0 auto;">
+      <div class="laser-beam" id="laser-beam"></div>
+      <div class="achievements-grid" id="achievements-grid" style="position: relative; z-index: 1; padding-left: 40px;">
 
       <div class="achievement-card ach-large" id="ach-1">
         <div class="ach-emoji">🥈</div>
@@ -347,7 +370,8 @@
           <span class="ach-tag">Workshop · IIT Bombay</span>
           <a href="certificates/techfest_iitb.png" target="_blank" class="cert-btn" id="cert-4">🪹 View Certificate</a>
         </div>
-      </div>
+        </div>
+    </div>
 
     </div>
   </section>
@@ -362,6 +386,8 @@
     <div class="contact-layout">
       <div class="contact-form-wrap">
         <form class="contact-form" id="contact-form">
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_subject" value="New Portfolio Message! 🚀" />
           <div class="form-group">
             <label for="name">Your Name</label>
             <input type="text" id="name" name="name" placeholder="Jane Doe" required />
@@ -427,6 +453,8 @@
 
   <!-- Scroll to top -->
   <button class="scroll-top" id="scroll-top" aria-label="Scroll to top">↑</button>
+
+  </div> <!-- End Main Wrapper -->
 
   <script src="script.js"></script>
 </body>

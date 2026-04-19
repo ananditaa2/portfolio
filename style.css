@@ -4,6 +4,46 @@
 
 /* ---- CSS Variables / Design Tokens ---- */
 :root {
+  /* Dark Mode Default */
+  --bg: #050508;
+  --bg-2: #0b0b10;
+  --surface: #101018;
+  --surface-2: #161622;
+  --border: rgba(255, 255, 255, 0.04);
+  --border-card: rgba(176, 38, 255, 0.25);
+
+  --pink: #ff0055;
+  --pink-light: #ff6b9d;
+  --purple: #b026ff;
+  --purple-light: #c77dff;
+  --blue: #00f0ff;
+  --blue-light: #90e0ef;
+  --gold: #ffb703;
+  --peach: #fb8500;
+  --mint: #00ffaa;
+
+  --text-primary: #f8f9fa;
+  --text-secondary: #adb5bd;
+  --text-muted: #6c757d;
+
+  --gradient-hero: linear-gradient(135deg, var(--blue) 0%, var(--purple) 50%, var(--gold) 100%);
+  --gradient-card: linear-gradient(145deg, rgba(16, 16, 24, 0.85), rgba(22, 22, 34, 0.6));
+  --gradient-accent: linear-gradient(135deg, var(--blue), var(--purple));
+
+  --shadow-sm: 0 4px 20px rgba(0, 240, 255, 0.08);
+  --shadow-md: 0 8px 30px rgba(176, 38, 255, 0.15);
+  --shadow-lg: 0 20px 60px rgba(176, 38, 255, 0.2);
+  --shadow-hover: 0 10px 40px rgba(0, 240, 255, 0.3);
+
+  --radius: 20px;
+  --radius-sm: 12px;
+  --radius-lg: 32px;
+
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-theme="light"] {
   --bg: #FAFAF8;
   --bg-2: #F3F0FF;
   --surface: #FFFFFF;
@@ -18,8 +58,6 @@
   --blue: #4ECDC4;
   --blue-light: #AECBFA;
   --gold: #FFD93D;
-  --peach: #FFD6A5;
-  --mint: #B5EAD7;
 
   --text-primary: #1A1A2E;
   --text-secondary: #5A5A7A;
@@ -28,18 +66,93 @@
   --gradient-hero: linear-gradient(135deg, #FF6B9D 0%, #7C5CFC 50%, #4ECDC4 100%);
   --gradient-card: linear-gradient(145deg, #ffffff, #f8f5ff);
   --gradient-accent: linear-gradient(135deg, #FF6B9D, #7C5CFC);
-
+  
   --shadow-sm: 0 2px 10px rgba(124,92,252,0.08);
   --shadow-md: 0 8px 30px rgba(124,92,252,0.12);
-  --shadow-lg: 0 20px 60px rgba(124,92,252,0.15);
   --shadow-hover: 0 20px 60px rgba(124,92,252,0.25);
+}
 
-  --radius: 20px;
-  --radius-sm: 12px;
-  --radius-lg: 32px;
+/* ---- Custom Cursor ---- */
+body { cursor: none; } /* Hide default cursor */
+a, button, .draggable { cursor: none !important; }
 
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-bounce: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+#cursor-dot {
+  position: fixed;
+  top: 0; left: 0;
+  width: 8px; height: 8px;
+  background: var(--blue);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s;
+}
+#cursor-spotlight {
+  position: fixed;
+  top: 0; left: 0;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(0,240,255,0.06) 0%, rgba(176,38,255,0.03) 40%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease-out;
+}
+#neural-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 2;
+}
+.hovering #cursor-dot {
+  width: 24px; height: 24px;
+  background: transparent;
+  border: 1px solid var(--blue);
+  box-shadow: 0 0 10px var(--blue);
+}
+
+/* ---- Terminal Preloader ---- */
+#preloader {
+  position: fixed;
+  inset: 0;
+  background: #0A0A0E;
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+.terminal-text {
+  font-family: 'Courier New', Courier, monospace;
+  color: var(--blue);
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+.terminal-text::after {
+  content: '_';
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* Theme Toggle Button */
+.nav-actions { display: flex; align-items: center; gap: 12px; }
+.theme-toggle {
+  background: var(--surface);
+  border: 1px solid var(--border-card);
+  border-radius: 50%;
+  width: 40px; height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+  z-index: 1001; /* Above cursor for clicking */
+}
+.theme-toggle:hover {
+  transform: scale(1.1) rotate(15deg);
+  border-color: var(--blue);
 }
 
 /* ---- Reset ---- */
@@ -547,25 +660,28 @@ section { padding: 100px 5vw; position: relative; }
    ============================================ */
 #projects { position: relative; z-index: 1; }
 .projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 22px;
-  max-width: 1100px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  max-width: 850px;
   margin: 0 auto;
+  position: relative;
 }
 .project-card {
   background: var(--gradient-card);
   border: 1px solid var(--border-card);
   border-radius: var(--radius);
   padding: 28px;
-  position: relative;
+  position: sticky;
+  top: 15vh;
+  transform-origin: top center;
   overflow: hidden;
   transition: var(--transition-bounce);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 -10px 30px rgba(0,0,0,0.5), var(--shadow-sm);
   cursor: grab;
 }
 .project-card:active { cursor: grabbing; }
-.project-card:hover { transform: translateY(-8px) rotate(-0.5deg); box-shadow: var(--shadow-hover); }
+.project-card:hover { transform: translateY(-4px); box-shadow: 0 -10px 40px rgba(0,0,0,0.6), var(--shadow-hover); }
 .project-card.drag-over { border: 2px dashed var(--purple-light); background: var(--bg-2); }
 .project-card.dragging { opacity: 0.5; transform: scale(0.97); }
 .project-accent {
@@ -727,12 +843,21 @@ section { padding: 100px 5vw; position: relative; }
    ACHIEVEMENTS
    ============================================ */
 #achievements { position: relative; z-index: 1; }
+
+.laser-beam {
+  position: absolute;
+  top: 0; left: 15px;
+  width: 4px; height: 0%;
+  background: linear-gradient(to bottom, var(--blue), var(--purple), var(--gold));
+  border-radius: 4px;
+  box-shadow: 0 0 15px var(--blue), 0 0 30px var(--purple);
+  z-index: 0;
+}
+
 .achievements-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 20px;
-  max-width: 1100px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 .achievement-card {
   background: var(--gradient-card);

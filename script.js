@@ -2,6 +2,193 @@
    ANANDITA PORTFOLIO — script.js
    ============================================ */
 
+/* ========== THEME TOGGLE ========== */
+const themeToggle = document.getElementById('theme-toggle');
+const currentTheme = localStorage.getItem('theme') || 'dark';
+if (currentTheme === 'light') {
+  document.documentElement.setAttribute('data-theme', 'light');
+  themeToggle.textContent = '🌙';
+}
+themeToggle.addEventListener('click', () => {
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  if (isLight) {
+    document.documentElement.removeAttribute('data-theme');
+    localStorage.setItem('theme', 'dark');
+    themeToggle.textContent = '💡';
+  } else {
+    document.documentElement.setAttribute('data-theme', 'light');
+    localStorage.setItem('theme', 'light');
+    themeToggle.textContent = '🌙';
+  }
+});
+
+/* ========== TERMINAL PRELOADER ========== */
+window.addEventListener('load', () => {
+  const lines = [
+    "neurolink_established: true",
+    "booting_core_modules...",
+    "resolving_dependencies...",
+    "> System initialized. Load profile... Anandita."
+  ];
+  const termElement = document.getElementById('term-text');
+  let lineIdx = 0;
+  let charIdx = 0;
+  
+  function typeWriter() {
+    if (lineIdx < lines.length) {
+      if (charIdx < lines[lineIdx].length) {
+        let currentText = termElement.textContent;
+        termElement.textContent = currentText + lines[lineIdx].charAt(charIdx);
+        charIdx++;
+        setTimeout(typeWriter, 25);
+      } else {
+        termElement.textContent += "\n";
+        lineIdx++;
+        charIdx = 0;
+        setTimeout(typeWriter, 150);
+      }
+    } else {
+      setTimeout(() => {
+        document.getElementById('preloader').style.opacity = '0';
+        document.getElementById('preloader').style.visibility = 'hidden';
+        
+        const mainW = document.getElementById('main-wrapper');
+        mainW.style.visibility = 'visible';
+        mainW.style.transition = 'opacity 1.5s ease-in-out';
+        mainW.style.opacity = '1';
+        
+        setTimeout(() => {
+          if (window.initGSAP) window.initGSAP();
+        }, 100);
+      }, 1000);
+    }
+  }
+  setTimeout(typeWriter, 300);
+});
+
+/* ========== CUSTOM NEURAL CURSOR ========== */
+const dot = document.getElementById('cursor-dot');
+const spotlight = document.getElementById('cursor-spotlight');
+const cvs = document.getElementById('neural-canvas');
+const ctx = cvs.getContext('2d');
+let width, height;
+
+function resize() {
+  width = window.innerWidth;
+  height = window.innerHeight;
+  cvs.width = width;
+  cvs.height = height;
+}
+window.addEventListener('resize', resize);
+resize();
+
+const mouse = { x: width/2, y: height/2 };
+const particles = [];
+for (let i=0; i<30; i++) {
+  particles.push({
+    x: Math.random() * width,
+    y: Math.random() * height,
+    vx: (Math.random() - 0.5) * 1,
+    vy: (Math.random() - 0.5) * 1
+  });
+}
+
+window.addEventListener('mousemove', e => {
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
+  dot.style.left = mouse.x + 'px';
+  dot.style.top = mouse.y + 'px';
+  spotlight.style.left = mouse.x + 'px';
+  spotlight.style.top = mouse.y + 'px';
+});
+
+document.querySelectorAll('a, button, .draggable').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+});
+
+function drawNeural() {
+  ctx.clearRect(0, 0, width, height);
+  const color = document.documentElement.getAttribute('data-theme') === 'light' ? 'rgba(124,92,252,' : 'rgba(0,240,255,';
+  
+  particles.forEach(p => {
+    p.x += p.vx; p.y += p.vy;
+    if(p.x < 0 || p.x > width) p.vx *= -1;
+    if(p.y < 0 || p.y > height) p.vy *= -1;
+    
+    // Connect to mouse
+    const dx = p.x - mouse.x;
+    const dy = p.y - mouse.y;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    if (dist < 180) {
+      ctx.beginPath();
+      ctx.moveTo(p.x, p.y);
+      ctx.lineTo(mouse.x, mouse.y);
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      ctx.strokeStyle = isLight ? `rgba(124,92,252, ${1 - dist/180})` : `rgba(0,240,255, ${1 - dist/180})`;
+      if(!isLight && Math.random() > 0.8) ctx.strokeStyle = `rgba(176,38,255, ${1 - dist/180})`;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    }
+  });
+  requestAnimationFrame(drawNeural);
+}
+drawNeural();
+
+/* ========== GSAP ANIMATIONS ========== */
+window.initGSAP = function() {
+  if (typeof gsap !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Deck of Cards Stacking Effect
+    const cards = gsap.utils.toArray('.project-card');
+    cards.forEach((card, i) => {
+      if (i !== cards.length - 1) {
+        gsap.to(card, {
+          scale: 0.9 + (0.02 * i),
+          opacity: 0.5,
+          scrollTrigger: {
+            trigger: card,
+            start: "top 15vh",
+            endTrigger: ".projects-grid",
+            end: "bottom bottom",
+            scrub: true
+          }
+        });
+      }
+      gsap.from(card, {
+        y: 80, opacity: 0, scale: 0.8, duration: 0.7,
+        scrollTrigger: { trigger: card, start: "top 85%", toggleActions: "play none none reverse" }
+      });
+    });
+
+    // Laser Beam Timeline
+    gsap.to('#laser-beam', {
+      height: "100%",
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#achievements-wrap",
+        start: "top center",
+        end: "bottom center",
+        scrub: true
+      }
+    });
+
+    // Achievement List Reveal
+    const achs = gsap.utils.toArray('.achievement-card');
+    achs.forEach((ach) => {
+      gsap.from(ach, {
+        x: -50, opacity: 0, duration: 0.6,
+        scrollTrigger: {
+          trigger: ach,
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        }
+      });
+    });
+  }
+};
+
 /* ========== NAVBAR: scroll & active link ========== */
 const navbar = document.getElementById('navbar');
 const navLinks = document.querySelectorAll('.nav-link');
@@ -55,7 +242,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 /* ========== INTERSECTION OBSERVER: reveal on scroll ========== */
 const revealElements = document.querySelectorAll(
-  '.about-card, .project-card, .achievement-card, .result-card, .contact-card, .contact-form-wrap'
+  '.about-card, .result-card, .contact-card, .contact-form-wrap'
 );
 revealElements.forEach(el => el.classList.add('reveal'));
 
@@ -361,14 +548,36 @@ document.getElementById('contact-form').addEventListener('submit', function (e) 
   const btn = document.getElementById('send-btn');
   btn.textContent = 'Sending... ⏳';
   btn.disabled = true;
-  setTimeout(() => {
+  const formData = new FormData(this);
+
+  fetch("https://formsubmit.co/ajax/ananditaindurkhya02@gmail.com", {
+    method: "POST",
+    headers: { 
+      'Accept': 'application/json'
+    },
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
     btn.textContent = 'Send Message ✉️';
     btn.disabled = false;
     this.reset();
     const success = document.getElementById('form-success');
+    success.textContent = "✅ Message sent! I'll get back to you soon.";
     success.classList.add('show');
     setTimeout(() => success.classList.remove('show'), 5000);
-  }, 1400);
+  })
+  .catch(error => {
+    console.error("Email send error:", error);
+    btn.textContent = 'Send Message ✉️';
+    btn.disabled = false;
+    const success = document.getElementById('form-success');
+    success.textContent = "❌ Failed to send. Please email me directly.";
+    success.style.color = "#ff6b6b"; 
+    success.style.background = "rgba(255, 107, 107, 0.1)";
+    success.classList.add('show');
+    setTimeout(() => success.classList.remove('show'), 5000);
+  });
 });
 
 /* ========== HOVER PARALLAX on hero visual ========== */
