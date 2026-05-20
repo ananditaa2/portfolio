@@ -387,20 +387,16 @@ document.querySelectorAll('.draggable').forEach(card => {
 
   // Skills nodes
   const skills = [
-    { label: 'Python',     color: 0xFF6B6B, size: 0.075 },
-    { label: 'JavaScript', color: 0xFFD93D, size: 0.075 },
-    { label: 'TypeScript', color: 0x4FC3F7, size: 0.065 },
-    { label: 'C++',        color: 0xA29BFE, size: 0.06  },
-    { label: 'React',      color: 0x00CEC9, size: 0.08  },
-    { label: 'Node.js',    color: 0x55EFC4, size: 0.07  },
-    { label: 'Flask',      color: 0xFD79A8, size: 0.065 },
-    { label: 'Vue.js',     color: 0xFDCB6E, size: 0.065 },
-    { label: 'Git',        color: 0x6C5CE7, size: 0.07  },
-    { label: 'Firebase',   color: 0xE17055, size: 0.065 },
-    { label: 'Streamlit',  color: 0xFF9F43, size: 0.065 },
-    { label: 'MediaPipe',  color: 0x1DD1A1, size: 0.065 },
-    { label: 'TF.js',      color: 0xFF9F43, size: 0.065 },
-    { label: 'MediaPipe',  color: 0x1DD1A1, size: 0.065 },
+    { label: 'DSA',         color: 0xFFC0CB, size: 0.08  },
+    { label: 'Frontend',    color: 0x74B9FF, size: 0.08  },
+    { label: 'UI/UX',       color: 0xFD79A8, size: 0.08  },
+    { label: 'MySQL',       color: 0x4FC3F7, size: 0.075 },
+    { label: 'Backend',     color: 0x55EFC4, size: 0.075 },
+    { label: 'Full Stack',  color: 0xA29BFE, size: 0.08  },
+    { label: 'C++',         color: 0xA29BFE, size: 0.075 },
+    { label: 'Python',      color: 0xFF6B6B, size: 0.08  },
+    { label: 'Git/GitHub',  color: 0x6C5CE7, size: 0.08  },
+    { label: 'AIML',        color: 0xFF9F43, size: 0.085 },
   ];
 
   const skillGroup = new THREE.Group();
